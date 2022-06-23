@@ -1,0 +1,89 @@
+﻿@model IEnumerable<DeliFood.Models.CartItem>
+@{
+    double totalPrice = 0;
+    foreach (var item in Model)
+    {
+        totalPrice += item.Total;
+    }
+
+}
+<div class="col-12">
+    <div class="table-content table-responsive">
+        <table class="table">
+            <thead>
+                <tr>
+                    <th class="product_remove">remove</th>
+                    <th class="product-thumbnail">images</th>
+                    <th class="cart-product-name">Product</th>
+                    <th class="product-price">Unit Price</th>
+                    <th class="product-quantity">Quantity</th>
+                    <th class="product-subtotal">Total</th>
+                </tr>
+            </thead>
+            <tbody>
+                @if (Model.Count() > 0){
+                    @foreach (var item in Model)
+                {
+                    <tr>
+                        <td class="product_remove" width="30">
+                            <a  class="product-item_remove" data-value="@item.ProductId">
+                                <i class="pe-7s-close" title="Remove"></i>
+                            </a>
+                        </td>
+                        <td width="150">
+                             <img src="~/images/product/@item.Image" width="100" height="100" alt="Cart Thumbnail">
+                        </td>
+                        <td class="product-name">@item.ProductName</td>
+                        <td class="product-price" width="200"><span class="amount">@item.Price.ToString("#,##0") VNĐ</span></td>
+                        <td class="quantity" width="40">
+                            <div class="cart-plus-minus">
+                                <input class="cart-plus-minus-box" value="@item.amount" type="text" readonly>
+                                <div class="dec qtybutton" data-idproduct="@item.ProductId"><i class="fa fa-minus"></i></div>
+                                <div class="inc qtybutton" data-idproduct="@item.ProductId"><i class="fa fa-plus"></i></div>
+                            </div>
+                            
+                        </td>
+                        <td class="product-subtotal" width="250"><small class="amount">@item.Total.ToString("#,##0") VNĐ</small></td>
+                    </tr>
+                }
+
+
+
+            }
+                else
+                {
+                        <tr>
+                               <td colspan="6">No items available</td>
+                        </tr>
+                }   
+
+
+            </tbody>
+
+         </table>
+    </div>
+    <div class="row">
+        <div class="col-12">
+            <div class="coupon-all">
+                <div class="coupon2">
+                    <a class="btn btn-primary rounded-0" asp-action="Index" asp-controller="Product" name="update_cart">Buy more</a>
+                </div>
+            </div>
+        </div>
+    </div>
+    @if(Model.Count()>0)
+    {
+        <div class="row">
+        <div class="col-md-5 ml-auto">
+            <div class="cart-page-total">
+                <h2>Cart totals</h2>
+                <ul>
+                    <li>VAT <span>@ViewBag.CurrentVAT %</span></li>
+                    <li>Total <span>@totalPrice.ToString("#,##0") VNĐ</span></li>
+                </ul>
+                <a asp-action="Checkout" asp-controller="Cart">Proceed to checkout</a>
+            </div>
+        </div>
+    </div>
+    }
+</div>

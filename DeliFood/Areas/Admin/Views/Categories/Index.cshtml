@@ -1,0 +1,80 @@
+@model IEnumerable<DeliFood.Models.Category>
+
+@{ ViewData["Title"] = "Index"; }
+
+<div class="page-header">
+    <h2 class="header-title">CATEGORY</h2>
+    <div class="header-sub-title">
+        <nav class="breadcrumb breadcrumb-dash">
+            <a asp-controller="Home" asp-action="Index" class="breadcrumb-item"><i class="anticon anticon-home m-r-5"></i>Home</a>
+            <span class="breadcrumb-item active">List category</span>
+        </nav>
+    </div>
+</div>
+<div class="card">
+    <div class="card-body">
+        <div class="row m-b-30">
+            <div class="col-lg-7">
+                <div class="d-md-flex">
+                </div>
+            </div>
+            <div class="col-lg-1">
+            </div>
+            <div class="col-lg-4 text-right">
+                <a class="btn btn-primary" asp-action="create">
+                    <i class="anticon anticon-plus-circle m-r-5"></i>
+                    <span>Add category</span>
+                </a>
+            </div>
+        </div>
+        <div class="table-responsive">
+            <table class="table table-hover e-commerce-table">
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Category Name</th>
+                        <th>Published</th>
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @if (Model != null)
+                    {
+                    @foreach (var item in Model)
+                    {
+            <tr>
+                <td>
+                    #@item.CatId
+                </td>
+                <td>
+                    @item.CatName
+                </td>
+
+                <td>
+                    @if (item.Published)
+                    {
+            <div class="d-flex align-items-center">
+                <div class="badge badge-success badge-dot m-r-10">    </div>
+                <div>Published</div>
+            </div> }
+            else
+            {
+            <div class="d-flex align-items-center">
+                <div class="badge badge-danger badge-dot m-r-10"></div>
+                <div>Non-published</div>
+            </div>}
+    </td>
+    <td>
+        <a class="btn btn-primary btn-tone m-r-5" asp-area="Admin" asp-controller="Categories" asp-action="Details" asp-route-id="@item.CatId">View</a>
+        <a class="btn btn-secondary btn-tone m-r-5" asp-area="Admin" asp-controller="Categories" asp-action="Edit" asp-route-id="@item.CatId">Edit</a>
+    </td>
+
+</tr>
+} }
+                </tbody>
+            </table>
+
+
+        </div>
+    </div>
+</div>

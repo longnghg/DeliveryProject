@@ -1,0 +1,95 @@
+@model DeliFood.Models.Product
+
+@{ ViewData["Title"] = "Create"; }
+<style>
+    #display_image{
+        width:268px;
+        height:211px;
+        border:1px solid black;
+        background-position:center;
+        background-size:cover;
+    }
+</style>
+<div class="page-header">
+    <h2 class="header-title">PRODUCT</h2>
+    <div class="header-sub-title">
+        <nav class="breadcrumb breadcrumb-dash">
+            <a asp-controller="Home" asp-action="Index" class="breadcrumb-item"><i class="anticon anticon-home m-r-5"></i>Home</a>
+            <a asp-controller="Roles" asp-action="Index" class="breadcrumb-item">List product</a>
+            <span class="breadcrumb-item active">Create new</span>
+        </nav>
+    </div>
+</div>
+<hr />
+<div class="row">
+    <div class="col-md-10">
+        <form asp-action="Create" method="post" enctype="multipart/form-data">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input type="hidden" asp-for="ProductId" />
+            <div class="row">
+                <div class="col-6">
+                    <div class="form-group">
+                        <label asp-for="ProductName" class="control-label"></label>
+                        <input asp-for="ProductName" class="form-control" />
+                        <span asp-validation-for="ProductName" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label class="control-label">Category</label>
+                        <select asp-for="CatId" class="form-control" asp-items="ViewBag.lsCat"></select>
+                        <span asp-validation-for="CatId" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label class="control-label">Quantity</label>
+                        <input asp-for="UnitInStock" class="form-control" />
+                        <span asp-validation-for="UnitInStock" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="Price" class="control-label"></label>
+                        <input asp-for="Price" class="form-control" />
+                        <span asp-validation-for="Price" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <input type="submit" value="Create" class="btn btn-primary" />
+                    </div>
+                </div>
+                <div class="col-md-4 offset-2">
+                    <label class="control-label">Image</label>
+                    <div class="card" style="max-width: 270px">
+                        <div class="" id="display_image">
+
+                        </div>
+                        <div class="card-body">
+                            <div class="custom-file">
+                                <input type="file" asp-for="FileImage" class="custom-file-input" id="image_input" accept="image/png, image/jpg">
+                                <label class="custom-file-label" id="image_link" for="customFile">Choose file</label>
+                                <span asp-validation-for="FileImage"></span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+   
+</div>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+<script>
+    const image_input = document.querySelector("#image_input");
+    var upload_image = "";
+
+    $('#image_input').change(function () {
+        const reader = new FileReader();
+        reader.addEventListener("load", () => {
+            upload_image = reader.result;
+            document.querySelector('#display_image').style.backgroundImage = `url(${upload_image})`;
+        });
+        reader.readAsDataURL(this.files[0]);
+        $('#image_link').text(this.files[0].name);
+    })
+</script>
+}

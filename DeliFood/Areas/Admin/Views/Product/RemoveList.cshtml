@@ -1,0 +1,105 @@
+﻿@using PagedList.Core.Mvc
+@using Newtonsoft.Json
+@model PagedList.Core.IPagedList<DeliFood.Models.Product>
+
+@{ ViewData["Title"] = "Remove List";
+    Layout = "~/Areas/Admin/Views/Shared/_LayoutAdmin.cshtml"; }
+
+<!-- Page Container START -->
+<!-- Content Wrapper START -->
+
+<div class="page-header">
+    <h2 class="header-title">PRODUCT</h2>
+    <div class="header-sub-title">
+        <nav class="breadcrumb breadcrumb-dash">
+            <a asp-controller="Home" asp-action="Index" class="breadcrumb-item"><i class="anticon anticon-home m-r-5"></i>Home</a>
+            <a asp-controller="Product" asp-action="Index" class="breadcrumb-item"><i class="anticon anticon-home m-r-5"></i>List product</a>
+            <span class="breadcrumb-item active">List product remove</span>
+        </nav>
+    </div>
+</div>
+<div class="card">
+    <div class="row m-b-30">
+        <div class="col-lg-7">
+            <div class="d-md-flex p-5">
+                <a class="btn btn-primary btn-tone-2" asp-action="Index">
+                    <span>Return</span>
+                </a>
+            </div>
+        </div>
+    
+    </div>
+    <div class="table-responsive">
+        <table class="table table-hover e-commerce-table">
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Product</th>
+                    <th>Category</th>
+                    <th>Price</th>
+                    <th>Status</th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                @if (Model != null)
+                {
+                    @foreach (var item in Model)
+                    {
+                        <tr>
+                            <td>
+                                #@item.ProductId
+                            </td>
+                            <td>
+                                @item.ProductName
+                            </td>
+                            <td>
+                                @item.Category.CatName
+                            </td>
+
+                            <td>
+                                @if (item.UnitInStock >= 20)
+                                {
+                                    <div class="d-flex align-items-center">
+                                        <div class="badge badge-success badge-dot m-r-10"></div>
+                                        <div>In stock</div>
+                                    </div>
+                                }
+                                else if (item.UnitInStock > 0 && item.UnitInStock < 20)
+                                {
+                                    <div class="d-flex align-items-center">
+                                        <div class="badge badge-warning badge-dot m-r-10"></div>
+                                        <div>In stock</div>
+                                    </div>
+                                }
+                                else
+                                {
+                                    <div class="d-flex align-items-center">
+                                        <div class="badge badge-danger badge-dot m-r-10"></div>
+                                        <div>Out of stock</div>
+                                    </div>
+                                }
+                            </td>
+                            <td>
+                                <a class="btn btn-danger btn-tone m-r-5" asp-area="Admin" asp-controller="Product" asp-action="Restone" asp-route-id="@item.ProductId">Restone</a>
+                            </td>
+
+                        </tr>
+                    }}
+
+            </tbody>
+        </table>
+
+
+    </div>
+</div>
+
+<div aria-label="Page navigatio">
+    <ul class="pagination">
+        <pager class="pager-container" list="@Model" asp-area="Admin" asp-controller="Product" asp-action="Removelist" />
+    </ul>
+</div>
+<!-- Content Wrapper END -->
+@section Scripts{
+    <script></script>
+} 

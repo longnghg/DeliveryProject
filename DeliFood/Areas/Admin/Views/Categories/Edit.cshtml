@@ -1,0 +1,48 @@
+@model DeliFood.Models.Category
+
+@{ ViewData["Title"] = "Edit"; }
+
+<div class="page-header">
+    <h2 class="header-title">CATEGORY</h2>
+    <div class="header-sub-title">
+        <nav class="breadcrumb breadcrumb-dash">
+            <a asp-controller="Home" asp-action="Index" class="breadcrumb-item"><i class="anticon anticon-home m-r-5"></i>Home</a>
+            <a asp-controller="Roles" asp-action="Index" class="breadcrumb-item">List category</a>
+            <span class="breadcrumb-item active">Edit</span>
+        </nav>
+    </div>
+</div>
+<div class="card p-3">
+    <h4 class="text-secondary mt-1">Edit category infomation</h4>
+    <hr />
+    <form asp-area="Admin" asp-controller="Categories" asp-action="Edit" method="post">
+        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+        <input type="hidden" asp-for="CatId" />
+        <div class="form-group row">
+            <label for="RoleName" class="col-sm-2 col-form-label">Category name</label>
+            <div class="col-sm-6">
+                <input asp-for="CatName" class="form-control" id="RoleNameInput" placeholder="Some thing can eat">
+                <span asp-validation-for="CatName" class="text-danger"></span>
+            </div>
+        </div>
+        <div class="form-group row">
+            <label for="RoleName" class="col-sm-2 col-form-label">Published </label>
+            <div class="col-sm-6">
+                <input asp-for="Published" type="checkbox"  id="RoleNameInput" >
+                <span asp-validation-for="Published" class="text-danger"></span>
+            </div>
+        </div>
+        <div class="form-group row">
+            <div class="col-sm-3">
+                <input type="submit" value="Save" class="btn btn-secondary btn-tone" />|
+                <a class="text-secondary" asp-area="Admin" asp-action="Index">Back to list</a>
+            </div>
+
+        </div>
+    </form>
+</div>
+
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

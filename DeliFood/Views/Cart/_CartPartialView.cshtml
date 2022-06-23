@@ -1,0 +1,53 @@
+﻿@model IEnumerable<DeliFood.Models.CartItem>
+@{
+    double sumMoney = 0;
+    foreach (var item in Model)
+    {
+        sumMoney += item.Total;
+    }
+}
+
+@if (Model.Count() > 0)
+{
+    <div class="minicart-content">
+        <div class="minicart-heading">
+            <h4 class="mb-0">Shopping Cart</h4>
+            <a href="#" class="button-close"><i class="pe-7s-close"></i></a>
+        </div>
+        <ul class="minicart-list">
+            @foreach (var item in Model)
+            {
+                <li class="minicart-product">
+                    <a class="product-item_remove" data-value="@item.ProductId">
+                        <i class="pe-7s-close"></i>
+                    </a>
+
+                    <a href="shop.html" class="product-item_img">
+                        <img class="img-full" src="~/images/product/@item.Image" alt="Product Image">
+                    </a>
+                    <div class="product-item_content">
+                        <h5 class="product-item_title">@item.ProductName</h5>
+                        <span class="product-item_quantity">@item.amount x @item.Price.ToString("#,##0") VNĐ</span>
+                    </div>
+                </li>
+            }
+        </ul>
+    </div>
+    <div class="minicart-item_total">
+        <span>Subtotal</span>
+        <div class="text-right">
+            <span class="ammount">@sumMoney.ToString("#,##0")</span><span> VNĐ</span>
+
+        </div>
+    </div>
+    <div class="group-btn_wrap d-grid gap-2">
+        <a asp-action="DetailsCart" asp-controller="Cart" class="btn btn-secondary btn-primary-hover">View Cart</a>
+        <a asp-action="Checkout" asp-controller="Cart" class="btn btn-secondary btn-primary-hover">Checkout</a>
+    </div>
+
+
+}
+else
+{
+    <small><strong>No available</strong></small>
+}

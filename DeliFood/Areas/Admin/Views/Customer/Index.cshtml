@@ -1,0 +1,151 @@
+@using PagedList.Core.Mvc
+@using Newtonsoft.Json
+@model PagedList.Core.IPagedList<DeliFood.Models.Customer>
+
+@{ ViewData["Title"] = "Index";
+    Layout = "~/Areas/Admin/Views/Shared/_LayoutAdmin.cshtml"; }
+
+<!-- Page Container START -->
+<!-- Content Wrapper START -->
+
+@*@if (ViewBag.NameFilter != null)
+{
+<input type="hidden" id="InputNameFilter" data-value="@ViewBag.NameFilter" />}
+@if (ViewBag.StatusFilter != null)
+{
+<input type="hidden" id="InputStatusFilter" data-value="@ViewBag.StatusFilter" />}
+@if (ViewBag.CatFilter != null)
+{
+<input type="hidden" id="InputCatFilter" data-value="@ViewBag.CatFilter" />}*@
+
+<div class="page-header">
+    <h2 class="header-title">CUSTOMER</h2>
+    <div class="header-sub-title">
+        <nav class="breadcrumb breadcrumb-dash">
+            <a asp-controller="Home" asp-action="Index" class="breadcrumb-item"><i class="anticon anticon-home m-r-5"></i>Home</a>
+            <span class="breadcrumb-item active">List customer</span>
+        </nav>
+    </div>
+</div>
+<div class="card">
+    <div class="card-body">
+        <div class="row m-b-30">
+            <div class="col-lg-4 text-right">
+
+            </div>
+        </div>
+
+        <div class="row m-b-30">
+            <div class="col-lg-3">
+                <label>Category</label>
+                <select class="form-control" id="sbCategory" asp-items="ViewBag.lsCat">
+                    <option value="0" selected>All</option>
+                </select>
+            </div>
+            <div class="col-lg-3 ">
+                <label>Status</label>
+                <select class="form-control" id="sbStatus" asp-items="ViewBag.lsStatus">
+                    <option value="0" selected>All</option>
+                </select>
+            </div>
+            <div class="col-lg-3 ">
+                <label>Product name</label>
+                <input type="text" id="txtProductName" class="form-control" placeholder="product name" />
+            </div>
+            <div class="col-lg-3 text-right mt-4 text-white">
+                <a id="FilterButton" class="btn btn-secondary btn-tone-2">Find</a>
+            </div>
+        </div>
+
+        <div class="table-responsive">
+            <table class="table table-hover e-commerce-table">
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Full Name</th>
+                        <th>Phone</th>
+                        <th>Email</th>
+                        <th>Status</th>
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @if (Model != null)
+                    {
+                    @foreach (var item in Model)
+                    {
+                    <tr>
+                        <td>
+                            #@item.CustomerId
+                        </td>
+                        <td>
+                            @item.FullName
+                        </td>
+                        <td>
+                            @item.Phone
+                        </td>
+                        <td>
+                            @item.Account.Email
+                        </td>
+
+                        <td>
+                            @if (item.Status)
+                            {
+                    <div class="d-flex align-items-center">
+                        <div class="badge badge-success badge-dot m-r-10"></div>
+                        <div>Normal</div>
+                    </div> }
+                    else
+                    {
+                    <div class="d-flex align-items-center">
+                        <div class="badge badge-danger badge-dot m-r-10"></div>
+                        <div>Spam</div>
+                    </div>}
+                        </td>
+                        <td>
+                            <a class="btn btn-primary btn-tone m-r-5" asp-area="Admin" asp-controller="Customer" asp-action="Details" asp-route-id="@item.CustomerId">View</a>
+                            <a class="btn btn-secondary btn-tone m-r-5" asp-area="Admin" asp-controller="Customer" asp-action="Edit" asp-route-id="@item.CustomerId">Edit</a>
+                        </td>
+
+                    </tr>
+}}
+
+                </tbody>
+            </table>
+
+
+        </div>
+    </div>
+</div>
+
+<div aria-label="Page navigatio">
+    <ul class="pagination">
+        <pager class="pager-container" list="@Model" asp-area="Admin" asp-controller="Customer" asp-action="Index" />
+    </ul>
+</div>
+<!-- Content Wrapper END -->
+@section Scripts{
+    <script src="~/JSFilterAdmin.js"></script>
+
+    @*<script>
+        let NameFilter;
+        let StatusFilter;
+        let CatFilter;
+
+        NameFilter = $('#InputNameFilter').data("value");
+        StatusFilter = $('#InputStatusFilter').data("value");
+        CatFilter = $('#InputCatFilter').data('value');
+        if (NameFilter != null) {
+            $('#txtProductName').val(NameFilter);
+        };
+        if (StatusFilter != null) {
+            $('#sbStatus option').removeAttr('selected');
+            $("#sbStatus option[value=" + "'" + StatusFilter + "'" + "]").attr('selected', true);
+        };
+        if (CatFilter != null) {
+            $('#sbCategory option').removeAttr('selected');
+            $("#sbCategory option[value=" + "'" + CatFilter + "'" + "]").attr('selected', true);
+        };
+
+    </script>*@
+} 

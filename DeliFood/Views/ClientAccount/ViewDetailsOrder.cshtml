@@ -1,0 +1,67 @@
+﻿@model IEnumerable<DeliFood.Models.OrderDetail>
+@{
+
+    double totalPrice = 0;
+    foreach (var item in Model)
+    {
+        totalPrice += item.TotalPrice;
+    }
+}
+<div class="checkout-area section-space-y-axis-100">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-12">
+                <div class="your-order">
+                    <div class="row">
+                        <div class="col-6">
+                            <h3>Your order</h3>
+                        </div>
+                        <div class="col-6">
+                            <small>Shipped date: <strong>@Model.First().ShipDate.ToString(string.Format("dd/MM/yyyy"))</strong></small>
+                        </div>
+                    </div>
+                    <div class="your-order-table table-responsive">
+                        <table class="table">
+                            <thead>
+                                <tr>
+                                    <th class="cart-product-name">Product</th>
+                                    <th class="cart-product-total">Total</th>
+
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach (var item in Model)
+                                {
+                                    <tr class="cart_item">
+                                        <td class="cart-product-name">
+                                            @item.Product.ProductName<strong class="product-quantity">
+                                                × @item.Quantity
+                                            </strong>
+                                        </td>
+                                        <td class="cart-product-total"><span class="amount">@item.TotalPrice.ToString("#,##0") VNĐ</span></td>
+                                    </tr>
+                                }
+                            </tbody>
+                            <tfoot>
+                                <tr>
+                                </tr>
+                                <tr class="order-total">
+                                    <th>Order Total</th>
+                                    <td><strong><span class="amount">@totalPrice.ToString("#,##0") VNĐ</span></strong></td>
+                                </tr>
+                            </tfoot>
+                        </table>
+                    </div>
+                    <div class="payment-method">
+                        <div class="payment-accordion">
+                            <small>(VAT included)</small>
+                            <small>VAT: <strong>@Model.First().VAT %</strong></small>
+
+                        </div>
+                    </div>
+                    <a class="btn btn-dark mt-3" asp-action="Profile">Return to history </a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

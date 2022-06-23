@@ -1,0 +1,154 @@
+﻿@model IEnumerable<DeliFood.Models.CartItem>
+@{
+    var customer = ViewBag.Customer;
+    double totalPrice = 0;
+    foreach (var item in Model)
+    {
+        totalPrice += item.Total;
+    }
+
+}
+<div class="checkout-area section-space-y-axis-100">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-6 col-12">
+                <form asp-action="Checkout" method="post">
+                    <div class="checkbox-form">
+                        <h3>Billing Details</h3>
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="checkout-form-list">
+                                    <label>Full Name</label>
+                                    <input placeholder="" type="text" value="@customer.FullName" readonly>
+                                </div>
+                            </div>
+                            @if(customer.Address != null)
+                            {
+                             <div class="col-md-12">
+                                <div class="checkout-form-list">
+                                    <label>Address</label>
+                                    <input placeholder="Street address" id="checkout-Address" value="@customer.Address" data-value="Address" type="text" readonly>
+                                </div>
+                            </div>
+                            }
+                            else
+                            {
+                            <div class="col-md-12">
+                                <div class="checkout-form-list">
+                                    <label>Address <span class="required">*</span></label>
+                                    <input placeholder="Street address" id="checkout-Address" data-value="not" type="text">
+                                    <span class="text-danger" id="addressNotif" style="display:none;">Please fill your address for payment</span>
+                                </div>
+                            </div>
+                            }
+                            
+                            <div class="col-md-6">
+                                <div class="checkout-form-list">
+                                    <label>Email </label>
+                                    <input type="text" value="@customer.Account.Email" readonly>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="checkout-form-list">
+                                    <label>Phone </label>
+                                    <input type="text" value="@customer.Phone" readonly>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="different-address">
+                            <div class="order-notes">
+                                <div class="checkout-form-list checkout-form-list-2">
+                                    <label>Order Notes</label>
+                                    <textarea id="checkout-mess" cols="30" rows="10" placeholder="Notes about your order, e.g. special notes for delivery."></textarea>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div class="col-lg-6 col-12">
+                <div class="your-order">
+                    <h3>Your order</h3>
+                    <div class="your-order-table table-responsive">
+                        <table class="table">
+                            <thead>
+                                <tr>
+                                    <th class="cart-product-name">Product</th>
+                                    <th class="cart-product-total">Total</th>
+
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach (var item in Model)
+                                {
+                                <tr class="cart_item">
+                                    <td class="cart-product-name">
+                                        @item.ProductName<strong class="product-quantity">
+                                            × @item.amount
+                                        </strong>
+                                    </td>
+                                    <td class="cart-product-total"><span class="amount">@item.Total.ToString("#,##0") VNĐ</span></td>
+                                </tr>
+
+
+                                }
+                            </tbody>
+                            <tfoot>
+                                <tr>
+                                </tr>
+                                <tr class="order-total">
+                                    <th>Order Total</th>
+
+                                    <td><strong><span class="amount">@totalPrice.ToString("#,##0") VNĐ</span></strong></td>
+                                </tr>
+                            </tfoot>
+                        </table>
+                    </div>
+                    <div class="payment-method">
+                        <div class="payment-accordion">
+                            <small>(VAT included)</small>
+
+                            <div class="order-button-payment">
+                                <input value="Place order" id="checkoutBtn" type="button">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts{
+<script>
+    $('#checkoutBtn').click(function () {
+        if ($('#checkout-Address').val() == "") {
+            $('#addressNotif').show();
+        }
+        else {
+            $('#addressNotif').hide();
+            var Note = $('#checkout-mess').val()
+            var AddressInput = $('#checkout-Address').data("value");
+            let Address;
+            if (AddressInput == "not") {
+                Address = $('#checkout-Address').val();
+            }
+            $.ajax({
+                type: "POST",
+                url: "/Cart/Checkout/",
+                data: {
+                    note: Note,
+                    address: Address
+                },
+                success: function (respone) {
+                    if (respone.success) {
+                        window.location.href = respone.redirect
+                    }
+                },
+            });
+        }
+
+        
+    })
+</script>
+}

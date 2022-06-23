@@ -1,0 +1,55 @@
+@model DeliFood.Models.AccountVM
+
+@{ ViewData["Title"] = "Edit"; }
+
+<div class="page-header">
+    <h2 class="header-title">ACCOUNT</h2>
+    <div class="header-sub-title">
+        <nav class="breadcrumb breadcrumb-dash">
+            <a asp-controller="Home" asp-action="Index" class="breadcrumb-item"><i class="anticon anticon-home m-r-5"></i>Home</a>
+            <a asp-controller="Roles" asp-action="Index" class="breadcrumb-item">List account</a>
+            <span class="breadcrumb-item active">Edit</span>
+        </nav>
+    </div>
+</div>
+<div class="card p-3">
+    <h4 class="text-secondary mt-1">Edit role infomation</h4>
+    <hr />
+    <form asp-area="Admin" asp-controller="Accounts" asp-action="Edit" method="post">
+        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+        <input type="hidden" asp-for="AccountId" />
+        <input type="hidden" asp-for="Email" />
+        <div class="form-group row">
+            <label for="RoleName" class="col-sm-2 col-form-label">Email</label>
+            <div class="col-sm-6">
+                <input asp-for="Email" class="form-control" id="RoleNameInput" placeholder="example@gmail.com" disabled>
+                <span asp-validation-for="Email" class="text-danger"></span>
+            </div>
+        </div>
+        <div class="form-group row">
+            <label for="Description" class="col-sm-2 col-form-label">Password</label>
+            <div class="col-sm-6">
+                <input asp-for="Pass" type="password" class="form-control" placeholder="At least 5 characters" />
+                <span asp-validation-for="Pass" class="text-danger"></span>
+            </div>
+        </div>
+        <div class="form-group row">
+            <label for="Description" class="col-sm-2 col-form-label">Re-Password</label>
+            <div class="col-sm-6">
+                <input asp-for="Repass" type="password" class="form-control" placeholder="At least 5 characters" />
+                <span asp-validation-for="Repass" class="text-danger"></span>
+            </div>
+        </div>
+        <div class="form-group row">
+            <div class="col-sm-3">
+                <input type="submit" class="btn btn-secondary btn-tone" />|
+                <a class="text-secondary" asp-area="Admin" asp-action="Index">Back to list</a>
+            </div>
+
+        </div>
+    </form>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

@@ -1,0 +1,64 @@
+@model DeliFood.Models.Category
+
+@{ ViewData["Title"] = "Details"; }
+
+<div class="page-header">
+    <h2 class="header-title">CATEGORY</h2>
+    <div class="header-sub-title">
+        <nav class="breadcrumb breadcrumb-dash">
+            <a asp-controller="Home" asp-action="Index" class="breadcrumb-item"><i class="anticon anticon-home m-r-5"></i>Home</a>
+            <a asp-controller="Roles" asp-action="Index" class="breadcrumb-item">List category</a>
+            <span class="breadcrumb-item active">Details</span>
+        </nav>
+    </div>
+</div>
+<div class="card p-3">
+    <h4 class="text-secondary mt-1">Thông tin tài khoản</h4>
+    <hr />
+    <div class="table-responsive">
+        <table class="product-info-table m-t-20">
+
+            <tbody>
+
+                <tr>
+                    <th>ID:</th>
+                    <td>@Model.CatId</td>
+                </tr>
+
+                <tr>
+                    <th>Category:</th>
+                    <td>@Model.CatName</td>
+                </tr>
+                <tr>
+                    <th>Status:</th>
+                    <td class="text-dark font-weight-semibold">
+                        @if (Model.Published)
+                        {
+                        <div class="d-flex align-items-center">
+                            <div class="badge badge-success badge-dot m-r-10">    </div>
+                            <div>Active</div>
+                        </div>
+                        }
+                        else
+                        {
+                        <div class="d-flex align-items-center">
+                            <div class="badge badge-danger badge-dot m-r-10">    </div>
+                            <div>Non-active</div>
+                        </div>
+                        }
+                    </td>
+                </tr>
+                <tr>
+                    <th>
+                        Change infomation:
+                    </th>
+                    <td>
+                        <a class="btn btn-secondary btn-tone" asp-area="Admin" asp-controller="Categories" asp-action="Edit" asp-route-id="@Model.CatId">Edit</a> |
+                        <a class="text-secondary" asp-area="Admin" asp-controller="Categories" asp-action="Index">Back to list</a>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+

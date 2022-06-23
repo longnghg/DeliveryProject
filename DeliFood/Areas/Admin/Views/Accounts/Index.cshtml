@@ -1,0 +1,105 @@
+@using PagedList.Core.Mvc
+@using Newtonsoft.Json
+@model PagedList.Core.IPagedList<DeliFood.Models.Account>
+
+@{ ViewData["Title"] = "Index";
+    Layout = "~/Areas/Admin/Views/Shared/_LayoutAdmin.cshtml"; }
+
+<!-- Page Container START -->
+<!-- Content Wrapper START -->
+
+<div class="page-header">
+    <h2 class="header-title">ACCOUNT</h2>
+    <div class="header-sub-title">
+        <nav class="breadcrumb breadcrumb-dash">
+            <a asp-controller="Home" asp-action="Index" class="breadcrumb-item"><i class="anticon anticon-home m-r-5"></i>Home</a>
+            <span class="breadcrumb-item active">List account</span>
+        </nav>
+    </div>
+</div>
+<div class="card">
+    <div class="card-body">
+        <div class="row m-b-30">
+            <div class="col-lg-7">
+                <div class="d-md-flex">
+                </div>
+            </div>
+            <div class="col-lg-1">
+            </div>
+   
+        </div>
+        <div class="table-responsive">
+            <table class="table table-hover e-commerce-table">
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Email</th>
+                        <th>Status</th>
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @if (Model != null)
+                    {
+        @foreach (var item in Model)
+        {
+<tr>
+    <td>
+        #@item.AccountId
+    </td>
+    <td>
+        @item.Email
+    </td>
+
+    <td>
+        @if (item.IsActive)
+        {
+<div class="d-flex align-items-center">
+    <div class="badge badge-success badge-dot m-r-10">    </div>
+    <div>Active</div>
+</div> }
+else
+{
+<div class="d-flex align-items-center">
+    <div class="badge badge-danger badge-dot m-r-10"></div>
+    <div>Non-active</div>
+</div>}
+    </td>
+    <td>
+        <a class="btn btn-primary btn-tone m-r-5" asp-area="Admin" asp-controller="Accounts" asp-action="Details" asp-route-id="@item.AccountId">View</a>
+        <a class="btn btn-secondary btn-tone m-r-5" asp-area="Admin" asp-controller="Accounts" asp-action="Edit" asp-route-id="@item.AccountId">Edit</a>
+        @if(item.Email != "rotkbynbyn@gmail.com")
+        {
+            <a class="btn btn-danger btn-tone m-r-5" asp-area="Admin" asp-controller="Accounts" asp-action="EditRole" asp-route-id="@item.AccountId">ChangeRole</a>
+
+        }
+
+    </td>
+
+</tr>} }
+    else
+    {
+<tr>
+    <td>No available</td>
+
+</tr>}
+                </tbody>
+            </table>
+
+
+        </div>
+    </div>
+</div>
+
+<div aria-label="Page navigatio">
+    <ul class="pagination">
+        <pager class="pager-container" list="@Model" asp-area="Admin" asp-controller="Accounts" asp-action="Index" />
+    </ul>
+</div>
+<!-- Content Wrapper END -->
+@section Scripts{
+    <script>
+
+
+    </script>
+} 

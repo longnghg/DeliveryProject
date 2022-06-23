@@ -1,0 +1,64 @@
+﻿@model DeliFood.Models.Product
+
+@{ ViewData["Title"] = "Update quantity"; }
+
+<div class="page-header">
+    <h2 class="header-title">PRODUCT</h2>
+    <div class="header-sub-title">
+        <nav class="breadcrumb breadcrumb-dash">
+            <a asp-controller="Home" asp-action="Index" class="breadcrumb-item"><i class="anticon anticon-home m-r-5"></i>Home</a>
+            <a asp-controller="product" asp-action="Index" class="breadcrumb-item">List product</a>
+            <span class="breadcrumb-item active">Update quantity</span>
+        </nav>
+    </div>
+</div>
+
+<div class="card p-3">
+    <div class="row">
+        <div class="col-md-10">
+            <form asp-action="UpdateQuantity" method="post" enctype="multipart/form-data">
+                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                <input type="hidden" asp-for="ProductId" />
+                <div class="row">
+                    <div class="col-6">
+                        <div class="form-group">
+                            <label asp-for="ProductName" class="control-label"></label>
+                            <input asp-for="ProductName" class="form-control" disabled />
+                            <span asp-validation-for="ProductName" class="text-danger"></span>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label">Quantity current</label>
+                            <input asp-for="UnitInStock" class="form-control" disabled/>
+                            <span asp-validation-for="UnitInStock" class="text-danger"></span>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label">Add more</label>
+                            <input asp-for="QuantityMore" class="form-control" />
+                            <span asp-validation-for="QuantityMore" class="text-danger"></span>
+                        </div>
+
+                        <div class="form-group">
+                            <input type="submit" value="Save" class="btn btn-secondary" />
+                        </div>
+                    </div>
+                    <div class="col-md-4 offset-2">
+                        <label class="control-label">Image</label>
+                        <div class="card" style="max-width: 270px">
+                            <img src="~/images/product/@Model.Image" id="image_tag" width="270" />
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div>
+
+    </div>
+
+    <div>
+        <a asp-action="Index">Back to List</a>
+    </div>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+
+}

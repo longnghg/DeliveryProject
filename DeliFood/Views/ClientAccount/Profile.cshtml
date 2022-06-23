@@ -1,0 +1,100 @@
+﻿@model DeliFood.Models.Customer
+@{
+    var lsOrder = ViewBag.lsOrder;
+   
+}
+<div class="account-page-area section-space-y-axis-100">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-3">
+                <ul class="nav myaccount-tab-trigger" id="account-page-tab" role="tablist">
+                
+                    <li class="nav-item">
+                        <a class="nav-link" id="account-orders-tab" data-bs-toggle="tab" href="#account-orders" role="tab" aria-controls="account-orders" aria-selected="false">Orders</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" id="account-details-tab" data-bs-toggle="tab" href="#account-details" role="tab" aria-controls="account-details" aria-selected="false">Account Details</a>
+                    </li>   
+                    <li class="nav-item">
+                        <a class="nav-link" id="account-logout-tab" asp-action="Logout" >Logout</a>
+                    </li>
+                </ul>
+            </div>
+            <div class="col-lg-9">
+                <div class="tab-content myaccount-tab-content" id="account-page-tab-content">
+                    
+                    <div class="tab-pane fade show active" id="account-orders" role="tabpanel" aria-labelledby="account-orders-tab">
+                        <div class="myaccount-orders">
+                            <h4 class="small-title">MY ORDERS</h4>
+                            <div class="table-responsive">
+                                <table class="table table-bordered table-hover">
+                                    <tbody>
+                                        <tr>
+                                            <th>ID</th>
+                                            <th>Order date</th>
+                                            <th>Total</th>
+                                            <th>Status</th>
+                                            <th></th>
+                                        </tr>
+                                        @foreach (var item in lsOrder)
+                                        {
+                                            <tr>
+                                                <td><a class="account-order-id" href="javascript:void(0)">#@item.OrderId</a></td>
+                                                <td>@item.OrderDate.ToString(string.Format("dd/MM/yyyy hh:mm tt"))</td>
+                                                <td>@item.TotalPrice.ToString("#,##0") VNĐ</td>
+                                                <td>
+                                                    @if (item.Status)
+                                                    {
+                                                        <div class="text-success">Processed</div>
+                                                    }
+                                                    else
+                                                    {
+                                                        <div class="text-danger">Pending</div>
+                                                    }
+                                                </td>
+                                                <td>
+                                                    <a asp-action="ViewDetailsOrder" asp-route-id="@item.OrderId" class="btn btn-secondary btn-primary-hover"><span>View</span></a>
+                                                </td>
+                                            </tr>
+                                        }
+                                        
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="tab-pane fade" id="account-details" role="tabpanel" aria-labelledby="account-details-tab">
+                        <div class="myaccount-details">
+                            <form  class="myaccount-form">
+                                <div class="myaccount-form-inner">
+                                    <div class="single-input single-input-half">
+                                        <label>Full Name</label>
+                                        <input type="text" value="@Model.FullName" readonly>
+                                    </div>
+                                    <div class="single-input">
+                                        <label>
+                                            Email
+                                        </label>
+                                        <input type="text" value="@Model.Account.Email" readonly>
+                                    </div>
+                                    <div class="single-input">
+                                        <label>
+                                            Phone number
+                                        </label>
+                                        <input type="text" value="@Model.Phone" readonly>
+                                    </div>
+                                    
+                                    <div class="single-input">
+                                        <a class="btn btn-custom-size lg-size btn-secondary btn-primary-hover rounded-0" asp-action="ChangePassword" asp-route-idaccount="@Model.AccountID">
+                                            <span>Change password</span>
+                                        </a>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

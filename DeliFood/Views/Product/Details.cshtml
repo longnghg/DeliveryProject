@@ -1,0 +1,137 @@
+﻿@model DeliFood.Models.Product
+@{
+    ViewData["Title"] = "Details product";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+
+    var lsProSameCat = ViewBag.lsProductsSameCat;
+
+    }
+
+<!-- Begin Main Content Area  -->
+<main class="main-content">
+    
+    <div class="single-product-area section-space-top-100">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-6">
+                    <div class="single-product-img h-100">
+                        <div class="swiper-container single-product-slider">
+                            <div class="swiper-wrapper">
+                                <div class="swiper-slide">
+                                    <a href="~/images/product/@Model.Image" class="single-img gallery-popup">
+                                        <img class="img-full" src="~/images/product/@Model.Image" width="555" height="645" alt="Product Image">
+                                    </a>
+                                </div>
+                            </div>
+                            <!-- Add Pagination -->
+                            <div class="swiper-pagination"></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-6">
+                    <div class="product-thumb-with-content row">
+                        <div class="col-12 order-lg-1 order-2 pt-10 pt-lg-0">
+                            <div class="single-product-content">
+                                <h2 class="title">@Model.ProductName</h2>
+                                <div class="price-box pb-1">
+                                    <span class="new-price text-danger">@Model.Price.ToString("#,##0") VNĐ</span>
+                                </div>
+                                <div class="rating-box-wrap pb-7">
+                                    <div class="rating-box">
+                                        <ul>
+                                            <li><i class="pe-7s-star"></i></li>
+                                            <li><i class="pe-7s-star"></i></li>
+                                            <li><i class="pe-7s-star"></i></li>
+                                            <li><i class="pe-7s-star"></i></li>
+                                            <li><i class="pe-7s-star"></i></li>
+                                        </ul>
+                                    </div>
+                                </div>
+                                <p class="short-desc mb-6">
+                                    Lorem ipsum dolor sit amet, consecte adipisicin elit, sed do
+                                    eiusmod tempor incidi ut labore et dolore magna aliqua. Ut enim ad minim veniam,
+                                    quis
+                                    nostrud exercita ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute
+                                    irure dolor in reprehenderit in voluptate velit esse cillum dolore.
+                                </p>
+                                <ul class="quantity-with-btn pb-7">
+                                    <li class="add-to-cart">
+                                        <a class="addtoCart btn btn-custom-size lg-size btn-primary btn-secondary-hover rounded-0" data-value="@Model.ProductId">Add to cart</a>
+                                    </li>
+                                </ul>
+                                <div class="product-category text-matterhorn pb-2">
+                                    <span class="title">Categories :</span>
+                                    <ul>
+                                        <li>
+                                            @Model.Category.CatName
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-12 order-lg-2 order-1 pt-10 pt-lg-0">
+                            <div class="swiper-container single-product-thumbs">
+                                <div class="swiper-wrapper">
+                                    @foreach (var item in lsProSameCat)
+                                    {
+                                        <a asp-action="Details" asp-route-id="@item.ProductId" class="swiper-slide">
+                                            <img class="img-full"width="150" height="100" src="~/images/product/@item.Image" alt="Product Thumnail">
+                                        </a>
+                                    }
+
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="product-tab-area section-space-top-100">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12">
+                    <ul class="nav product-tab-nav product-tab-style-2" role="tablist">
+                        <li class="nav-item" role="presentation">
+                            <a class="active btn btn-custom-size" id="description-tab" data-bs-toggle="tab" href="#description" role="tab" aria-controls="description" aria-selected="true">
+                                Description
+                            </a>
+                        </li>
+                    </ul>
+                    <div class="tab-content product-tab-content">
+                        <div class="tab-pane fade show active" id="description" role="tabpanel" aria-labelledby="description-tab">
+                            <div class="product-description-body">
+                                <p class="short-desc mb-0">
+                                    Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed
+                                    do eiusmod tempor incidi ut labore et dolore magna aliqua. Ut enim ad minim veniam,
+                                    quis nostrud exercit ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis
+                                    aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat
+                                    nulla pariatur. Excepteurdf sint occaecat cupidatat non proident, sunt in culpa qui
+                                    officia deserunt mollit anim id est laborum. Sed ut perspiciatis unde omnis iste
+                                    natus error sit voluptatem accusl doloremque laudantium, totam rem aperiam, eaque
+                                    ipsa quae ab illo inventore v et quasi architecto beatae vitae dicta sunt explicabo.
+                                    Nemo enim ipsam voluptadtem quia voluptas sit aspernatur aut odit aut fugit, sed
+                                    quia consequuntur magni dolores eos qui ratione
+                                </p>
+                            </div>
+                        </div>
+                
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="product-slider-area section-space-top-95 section-space-bottom-100">
+        
+    </div>
+</main>
+<!-- Main Content Area End Here  -->
+@section Scripts{
+    <script>
+        $('.addtoCart').click(function () {
+            var idProduct = $(this).data("value");
+            addToCart(idProduct);
+        })
+    </script>
+}

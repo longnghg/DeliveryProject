@@ -1,0 +1,42 @@
+@model DeliFood.Models.VAT
+
+@{ ViewData["Title"] = "Edit VAT"; }
+
+<div class="page-header">
+    <h2 class="header-title">ORDER</h2>
+    <div class="header-sub-title">
+        <nav class="breadcrumb breadcrumb-dash">
+            <span class="breadcrumb-item active">Edit VAT</span>
+        </nav>
+    </div>
+
+</div>
+<div class="card">
+    <div class="card-body">
+        <div class="row">
+            <div class="col-md-4">
+                <form asp-action="ChangeVAT">
+                    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                    <input type="hidden" asp-for="Id" />
+                    <div class="form-group">
+                        <label asp-for="CurrentVAT" class="control-label"></label>
+                        <input asp-for="CurrentVAT" class="form-control" />
+                        <span asp-validation-for="CurrentVAT" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <input type="submit" value="Save" class="btn btn-primary" />
+                    </div>
+                </form>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index" asp-controller="Order">Back to order list</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

@@ -1,0 +1,114 @@
+﻿@{ ViewData["Title"] = "Shop";
+                Layout = "~/Views/Shared/_Layout.cshtml";
+    }
+<!-- Begin Main Content Area -->
+
+<main class="main-content">
+    <div class="breadcrumb-area breadcrumb-height" data-bg-image="images/imageforclient/product1920.webp">
+        <div class="container h-100">
+            <div class="row h-100">
+                <div class="col-lg-12">
+                    <div class="breadcrumb-item">
+                        
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="shop-area section-space-y-axis-100">
+        <div class="container">
+           
+            <div class="row">
+                <div class="col-lg-3 order-lg-1 order-2 pt-10 pt-lg-0">
+                    <div class="sidebar-area">
+                        <div class="widgets-searchbox mb-9">
+                            <form id="widgets-searchbox" action="#">
+                                <input class="input-field" id="nameFilter" type="text" placeholder="Search">
+                                <button class="widgets-searchbox-btn" type="button" id="searchName">
+                                    <i class="pe-7s-search"></i>
+                                </button>
+                            </form>
+                        </div>
+                        <div class="widgets-area widgets-filter mb-9">
+                            <h2 class="widgets-title mb-5">Price</h2>
+                            <div class="price-filter">
+                                <select class="nice-select wide rounded-0" id="priceFilter">
+                                    <option selected>All</option>
+                                    <option value="50000">Lower 50.000 vnđ</option>
+                                    <option value="200000">Lower 200.000 vnđ</option>
+                                    <option value="400000">Lower 400.000 vnđ</option>
+                                    <option value="600000">Lower 600.000 vnđ</option>
+                                    <option value="1000000">Lower 1.000.000 vnđ</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="widgets-area widgets-filter mb-9">
+                            <h2 class="widgets-title mb-5">Category</h2>
+                            <div class="price-filter">
+                                <select class="nice-select wide rounded-0" id="catFilter" asp-items="@ViewBag.lsCat">
+                                    <option value="0" selected>All</option>
+                                </select>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+                <div class="col-lg-9 order-lg-2 order-1">
+                    <div class="product-topbar">
+                        <ul>
+                            <li class="product-view-wrap">
+                                <ul class="nav" role="tablist">
+                                    <li class="grid-view" role="presentation">
+                                        <a class="active" id="grid-view-tab" data-bs-toggle="tab" href="#grid-view" role="tab" aria-selected="true">
+                                            <i class="fa fa-th"></i>
+                                        </a>
+                                    </li>
+                                </ul>
+                            </li>
+                            <li class="page-count">
+                                List product found
+                            </li>
+                            <li class="short">
+                                <select class="nice-select wide rounded-0" id="sbOrdering">
+                                    <option value="0">Sort by Default</option>
+                                    <option value="name">Sort by Name</option>
+                                    <option value="pricelow">Price: Hight-Low</option>
+                                    <option value="pricehigh">Price: Low-High </option>
+                                </select>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="tab-content text-charcoal pt-8">
+                        <div class="tab-pane fade show active" id="gridView" role="tabpanel" aria-labelledby="grid-view-tab">
+
+                        </div>
+                    </div>
+                    <div class="pagination-area pt-10">
+                        <nav aria-label="Page navigation example">
+                            <ul class="pagination justify-content-center">
+                                <li class="page-item">
+                                    <a class="page-link" href="#" aria-label="Previous">
+                                        <span class="fa fa-chevron-left"></span>
+                                    </a>
+                                </li>
+                                <li class="page-item active"><a class="page-link" href="#">1</a></li>
+                                <li class="page-item"><a class="page-link" href="#">2</a></li>
+                                <li class="page-item">
+                                    <a class="page-link" href="#" aria-label="Next">
+                                        <span class="fa fa-chevron-right"></span>
+                                    </a>
+                                </li>
+                            </ul>
+                        </nav>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</main>
+<!-- Main Content Area End Here -->
+@section Scripts{
+<script>
+    loadMainProductView();
+</script>
+}

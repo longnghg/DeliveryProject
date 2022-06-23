@@ -1,0 +1,86 @@
+@model DeliFood.Models.Product
+
+@{ ViewData["Title"] = "Details"; }
+<div class="page-header">
+    <h2 class="header-title">PRODUCT</h2>
+    <div class="header-sub-title">
+        <nav class="breadcrumb breadcrumb-dash">
+            <a asp-controller="Home" asp-action="Index" class="breadcrumb-item"><i class="anticon anticon-home m-r-5"></i>Home</a>
+            <a asp-controller="product" asp-action="Index" class="breadcrumb-item">List product</a>
+            <span class="breadcrumb-item active">Xoá sản phẩm: @Model.ProductName</span>
+        </nav>
+    </div>
+</div>
+
+<div class="card p-3">
+    <h4 class="text-secondary mt-1">Infomation product</h4>
+    <hr />
+    <label class="text-secondary mb-2">Image product</label>
+    <img src="~/images/product/@Model.Image" width="140" />
+    <hr />
+
+    <div class="table-responsive">
+        <table class="product-info-table m-t-20">
+            <tbody>
+                <tr>
+                    <th>ID:</th>
+                    <td>#@Model.ProductId</td>
+                </tr>
+
+                <tr>
+                    <th>Product name:</th>
+                    <td>@Model.ProductName</td>
+                </tr>
+                <tr>
+                    <th>Category:</th>
+                    <td>@Model.Category.CatName</td>
+                </tr>
+                <tr>
+                    <th>Unit in stock:</th>
+                    <td>@Model.UnitInStock</td>
+                </tr>
+                <tr>
+                    <th>Price:</th>
+                    <td>@Model.Price</td>
+                </tr>
+
+                <tr>
+                    <th>Status:</th>
+                    <td class="text-dark font-weight-semibold">
+                        @if (!Model.IsDelete)
+                        {
+            <div class="d-flex align-items-center">
+                <div class="badge badge-success badge-dot m-r-10">    </div>
+                <div>Active</div>
+            </div> }
+        else
+        {
+<div class="d-flex align-items-center">
+    <div class="badge badge-danger badge-dot m-r-10">    </div>
+    <div>Non-active</div>
+</div>}
+                    </td>
+                </tr>
+                <tr>
+                    <th>
+                        Change infomation:
+
+                    </th>
+                    <td>
+                        <form method="post" asp-action="Delete">
+                            <input type="hidden" asp-for="ProductId" />
+                            <div class="row">
+                                <div class="col-4">
+                                    <input class="btn btn-danger btn-tone" type="submit" value="Delete" /> |
+                                </div>
+                          
+                                <a class="text-secondary mt-2" asp-area="Admin" asp-controller="Product" asp-action="Index">Back to list</a>
+                            </div>
+
+                        </form>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>

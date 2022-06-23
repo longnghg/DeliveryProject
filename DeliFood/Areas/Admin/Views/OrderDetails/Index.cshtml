@@ -1,0 +1,108 @@
+
+@model IList<DeliFood.Models.OrderDetail>
+
+@{ ViewData["Title"] = "Details page";
+    Layout = "~/Areas/Admin/Views/Shared/_LayoutAdmin.cshtml";
+    var format = System.Globalization.CultureInfo.GetCultureInfo("vi-VN");
+    int i = 0;
+    double total = 0;
+    foreach (var item in Model)
+    {
+        total += item.TotalPrice;
+    }
+ }
+
+<!-- Page Container START -->
+<!-- Content Wrapper START -->
+<div class="page-header">
+    <h2 class="header-title">ORDER</h2>
+    <div class="header-sub-title">
+        <nav class="breadcrumb breadcrumb-dash">
+            <a asp-controller="Home" asp-action="Index" class="breadcrumb-item"><i class="anticon anticon-home m-r-5"></i>Home</a>
+            <a asp-controller="Order" asp-action="Index" class="breadcrumb-item"><i class="anticon anticon-home m-r-5"></i>List order</a>
+            <span class="breadcrumb-item active">Order details</span>
+        </nav>
+    </div>
+</div>
+<div class="row ml-2">
+    <h3> <strong> IDBill -#@Model[0].OrderId</strong> </h3>
+   
+</div>
+<div class="card">
+    <div class="row">
+        <div class="col-4 mt-3 ml-3">
+            <a class="btn btn-secondary btn-tone m-r-5" asp-area="Admin" asp-controller="Order" asp-action="Index">Back to list</a>
+
+        </div>
+    </div>
+    <div class="card-body">
+        <div class="table-responsive">
+            <table class="table table-hover e-commerce-table">
+                <thead>
+                    <tr>
+                        <th>Num</th>
+                        <th>Product</th>
+                        <th>Price</th>
+                        <th>Quantity</th>
+                        <th>Total</th>
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @if (Model != null)
+                    {
+        @foreach (var item in Model)
+        {
+<tr>
+    <td>
+        #@(++i)
+    </td>
+    <td>
+        @item.Product.ProductName
+    </td>
+    <td>
+        @String.Format(format,"{0:c0}", item.Product.Price)
+    </td>
+    <td>
+        @item.Quantity
+    </td>
+    <td>
+        @String.Format(format, "{0:c0}", item.TotalPrice)
+    </td>
+
+    <td>
+        <a class="btn btn-primary btn-tone m-r-5" asp-area="Admin" asp-controller="OrderDetails" asp-action="Edit" asp-route-id="@item.OrderDetailId">Edit</a>
+        <a class="btn btn-danger btn-tone m-r-5" asp-area="Admin" asp-controller="OrderDetails" asp-action="Delete" asp-route-id="@item.OrderDetailId">Delete</a>
+    </td>
+
+</tr>}}
+
+                </tbody>
+            </table>
+
+
+        </div>
+    </div>
+    <div class="row">
+       
+        <div class="col-3 offset-8">
+            <div class="row">
+                <label style="font-size:20px">Total: <strong id="totalPrice">khehe</strong> </label> <small>VNĐ</small>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Content Wrapper END -->
+@section Scripts{
+    <script>
+        let total = @total;
+        let formatPrice = formatCash(total.toString());
+        $('#totalPrice').text(formatPrice);
+        function formatCash(str) {
+            return str.split('').reverse().reduce((prev, next, index) => {
+                return ((index % 3) ? next : (next + ',')) + prev
+            })
+        }
+    </script>
+} 

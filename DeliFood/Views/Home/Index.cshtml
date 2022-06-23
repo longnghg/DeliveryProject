@@ -1,0 +1,208 @@
+﻿
+@{
+    ViewData["Title"] = "Home Page";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<!-- Begin Slider Area -->
+<div class="slider-area">
+
+    <!-- Main Slider -->
+    <div class="swiper-container main-slider swiper-arrow with-bg_white">
+        <div class="swiper-wrapper">
+            <div class="swiper-slide animation-style-01">
+                <div class="slide-inner bg-height" data-bg-image="~/assets/images/slider/bg/1-1.jpg">
+                    <div class="parallax-img-wrap">
+                        <div class="chilly">
+                            <div class="scene fill">
+                                <div class="expand-width" data-depth="0.2">
+                                    <img src="~/images/imageforclient/homeindex2012.jpeg" width="231" height="210" alt="Inner Image">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="avocado">
+                            <div class="scene fill">
+                                <div class="expand-width" data-depth="0.5">
+                                    <img src="~/images/imageforclient/homeindex202.webp" width="224" height="204" alt="Inner Image">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="container">
+                        <div class="parallax-with-content">
+                            <div class="slide-content">
+                                <span class="sub-title mb-3">Delicious & Catchy</span>
+                                <h2 class="title mb-9">-Foodie Moments </h2>
+                                <div class="button-wrap">
+                                    <a class="btn btn-custom-size lg-size btn-primary btn-white-hover rounded-0"  asp-controller="Product" asp-action="Index">Shop Now</a>
+                                </div>
+                            </div>
+                            <div class="parallax-img-wrap">
+                                <div class="tomatoes">
+                                    <div class="scene fill">
+                                        <div class="expand-width" data-depth="0.5">
+                                            <img src="~/images/imageforclient/homeindex601.webp" width="601" height="426" alt="Inner Image">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="swiper-slide animation-style-01">
+                <div class="slide-inner bg-height" data-bg-image="~/assets/images/slider/bg/1-1.jpg">
+                    <div class="parallax-img-wrap">
+                        <div class="chilly">
+                            <div class="scene fill">
+                                <div class="expand-width" data-depth="0.2">
+                                    <img src="~/images/imageforclient/homeindex201.jpeg" width="231" height="210" alt="Inner Image">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="avocado">
+                            <div class="scene fill">
+                                <div class="expand-width" data-depth="0.5">
+                                    <img src="~/images/imageforclient/homeindex2022.webp" width="224" height="204" alt="Inner Image">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="container">
+                        <div class="parallax-with-content">
+                            <div class="slide-content">
+                                <span class="sub-title mb-3">Natural & Organic</span>
+                                <h2 class="title mb-9">-40% Offer All <br> Products.</h2>
+                                <div class="button-wrap">
+                                    <a class="btn btn-custom-size lg-size btn-primary btn-white-hover rounded-0"  asp-controller="Product" asp-action="Index">Shop Now</a>
+                                </div>
+                            </div>
+                            <div class="parallax-img-wrap">
+                                <div class="tomatoes">
+                                    <div class="scene fill">
+                                        <div class="expand-width" data-depth="0.5">
+                                            <img src="~/images/imageforclient/homeindex6012.webp" width="601" height="426" alt="Inner Image">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Add Pagination -->
+        <div class="swiper-pagination with-bg d-md-none"></div>
+
+        <!-- Add Arrows -->
+        <div class="swiper-button-next"></div>
+        <div class="swiper-button-prev"></div>
+    </div>
+
+</div>
+<!-- Slider Area End Here -->
+<!-- Begin Shipping Area -->
+<div class="shipping-area section-space-top-100">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-4 col-md-6">
+                <div class="shipping-item">
+                    <div class="shipping-img">
+                        <img src="~/assets/images/shipping/icon/plane.png" alt="Shipping Icon">
+                    </div>
+                    <div class="shipping-content">
+                        <h5 class="title">Free Shipping</h5>
+                        <p class="short-desc mb-0">Free Home Delivery Offer</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-4 col-md-6 pt-6 pt-md-0">
+                <div class="shipping-item">
+                    <div class="shipping-img">
+                        <img src="~/assets/images/shipping/icon/earphones.png" alt="Shipping Icon">
+                    </div>
+                    <div class="shipping-content">
+                        <h5 class="title">Online Support</h5>
+                        <p class="short-desc mb-0">24/7 Online Support Provide</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-4 col-md-6 pt-6 pt-lg-0">
+                <div class="shipping-item">
+                    <div class="shipping-img">
+                        <img src="~/assets/images/shipping/icon/shield.png" alt="Shipping Icon">
+                    </div>
+                    <div class="shipping-content">
+                        <h5 class="title">Secure Payment</h5>
+                        <p class="short-desc mb-0">Fully Secure Payment System</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Shipping Area End Here -->
+<!-- Begin Product Area -->
+<div class="product-area section-space-top-100">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12">
+                <ul class="nav product-tab-nav pb-10" id="myTab" role="tablist">
+                    <li class="nav-item" role="presentation">
+                        <a class="category active" data-value="0" data-bs-toggle="tab"  role="tab" aria-controls="all-items" aria-selected="true">
+                            <div class="product-tab-icon">
+                                <img src="~/assets/images/product/icon/1.png" alt="Product Icon">
+                            </div>
+                            All Items
+                        </a>
+                    </li>
+                    <li class="nav-item" role="presentation">
+                        <a  class="category" data-value="1" data-bs-toggle="tab"  role="tab" aria-controls="vegetable" aria-selected="false">
+                            <div class="product-tab-icon">
+                                <img src="~/assets/images/product/icon/3.png" alt="Product Icon">
+                            </div>
+                            Vegetable
+                        </a>
+                    </li>
+                    <li class="nav-item" role="presentation">
+                        <a  class="category" data-value="2" data-bs-toggle="tab" role="tab" aria-controls="fish-meat" aria-selected="false">
+                            <div class="product-tab-icon">
+                                <img src="~/assets/images/product/icon/4.png" alt="Product Icon">
+                            </div>
+                            Meat
+                        </a>
+                    </li>
+                    <li class="nav-item" role="presentation">
+                        <a class="category" data-value="3" data-bs-toggle="tab" role="tab" aria-controls="wheat" aria-selected="false">
+                            <div class="product-tab-icon">
+                                <img src="~/assets/images/product/icon/2.png" alt="Product Icon">
+                            </div>
+                            Combo
+                        </a>
+                    </li>
+                </ul>
+                <div class="tab-content" id="myTabContent">
+                    <div class="tab-pane fade show active" id="all-items" role="tabpanel" aria-labelledby="all-items-tab">
+                        <div class="product-item-wrap row" id="gridView">
+
+                            
+                    
+                        </div>
+                    </div>
+                </div>
+                <div class="row m-5">
+                        <a class="btn btn-primary rounded-0" asp-controller="Product" asp-action="Index">
+                            <h4>View more</h4> <h2>Food</h2>
+                        </a> 
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Product Area End Here -->
+@section Scripts{
+<script>
+    loadMainView(0);
+
+</script>
+}

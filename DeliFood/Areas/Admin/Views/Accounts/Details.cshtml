@@ -1,0 +1,66 @@
+@model DeliFood.Models.Account
+
+@{ ViewData["Title"] = "Details"; }
+<div class="page-header">
+    <h2 class="header-title">ACCOUNT</h2>
+    <div class="header-sub-title">
+        <nav class="breadcrumb breadcrumb-dash">
+            <a asp-controller="Home" asp-action="Index" class="breadcrumb-item"><i class="anticon anticon-home m-r-5"></i>Home</a>
+            <a asp-controller="Accounts" asp-action="Index" class="breadcrumb-item">List account</a>
+            <span class="breadcrumb-item active">Chi tiết tài khoản: @Model.Email</span>
+        </nav>
+    </div>
+</div>
+
+<div class="card p-3">
+    <h4 class="text-secondary mt-1">Infomation account</h4>
+    <hr />
+    <div class="table-responsive">
+        <table class="product-info-table m-t-20">
+
+            <tbody>
+
+                <tr>
+                    <th>Email:</th>
+                    <td>@Model.Email</td>
+                </tr>
+
+                <tr>
+                    <th>Create date:</th>
+                    <td>@Model.CreateDate.ToString("dd-MM-yyyy")</td>
+                </tr>
+                <tr>
+                    <th>Role:</th>
+                    <td>@Model.Role</td>
+                </tr>
+                <tr>
+                    <th>Status:</th>
+                    <td class="text-dark font-weight-semibold">
+                        @if (Model.IsActive)
+                        {
+            <div class="d-flex align-items-center">
+                <div class="badge badge-success badge-dot m-r-10">    </div>
+                <div>Đang hoạt động</div>
+            </div> }
+        else
+        {
+            <div class="d-flex align-items-center">
+                <div class="badge badge-danger badge-dot m-r-10">    </div>
+                <div>Không hoạt động</div>
+            </div>}
+                    </td>
+                </tr>
+                <tr>
+                    <th>
+                        Change infomation:
+
+                    </th>
+                    <td>
+                        <a class="btn btn-secondary btn-tone" asp-area="Admin" asp-controller="Accounts" asp-action="Edit" asp-route-id="@Model.AccountId">Edit</a> |
+                        <a class="text-secondary" asp-area="Admin" asp-controller="Accounts" asp-action="Index">Back to list</a>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>

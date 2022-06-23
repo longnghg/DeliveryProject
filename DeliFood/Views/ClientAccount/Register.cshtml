@@ -1,0 +1,60 @@
+﻿@model DeliFood.Models.RegisterVM
+@{
+    ViewData["Title"] = "Blog";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<div class="login-register-area section-space-y-axis-100">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-5">
+                <div class="col-6 offset-6">
+                    <a class="btn ml-auto text-white" asp-action="Login" style="width:200px; border:1px solid green; padding:20px 20px 20px 20px; margin-top:100px; background-color:black">
+                        < Click here to LOGIN
+                    </a>
+                </div>
+
+            </div>
+            <div class="col-lg-6 pt-10 pt-lg-0">
+                <form method="post" asp-action="Register">
+                    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                    <div class="login-form">
+                        <h4 class="login-title">Register</h4>
+                        <div class="row">
+                            <div class="col-md-12 col-12">
+                                <label>Full Name</label>
+                                <input asp-for="Fullname" placeholder="Full Name">
+                                <span asp-validation-for="Fullname" class="text-danger"></span>
+                            </div>
+                            <div class="col-md-12 col-12">
+                                <label>Phone number</label>
+                                <input asp-for="Phone" placeholder="Full Name">
+                                <span asp-validation-for="Phone" class="text-danger"></span>
+                            </div>
+                            <div class="col-md-12">
+                                <label>Email Address*</label>
+                                <input asp-for="Username" placeholder="Email Address">
+                                <span asp-validation-for="Username" class="text-danger"></span>
+                            </div>
+                            <div class="col-md-6">
+                                <label>Password</label>
+                                <input type="password" asp-for="Password" placeholder="Password">
+                                <span asp-validation-for="Password" class="text-danger"></span>
+                            </div>
+                            <div class="col-md-6">
+                                <label>Confirm Password</label>
+                                <input type="password" asp-for="RePassword" type="password" placeholder="Confirm Password">
+                                <span asp-validation-for="RePassword" class="text-danger"></span>
+                            </div>
+                            <div class="col-12">
+                                <button class="btn btn-custom-size lg-size btn-secondary btn-primary-hover rounded-0">Register</button>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}
